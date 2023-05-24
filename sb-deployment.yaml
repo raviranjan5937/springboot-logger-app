@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sbwebappdeployment
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+  selector:
+    matchLabels:
+      app: sb-web-app
+      version: v1
+      color: blue
+  template:
+    metadata:
+      name: sbwebapppod
+      labels:
+        app: sb-web-app
+        version: v1
+        color: blue
+    spec:
+      containers:
+        - name: sbwebappcontainer
+          image: raviranjan5937/springboot-logger-app
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
